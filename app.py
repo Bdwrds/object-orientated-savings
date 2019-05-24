@@ -4,6 +4,7 @@ import pandas as pd
 #import matplotlib.pyplot as plt
 
 import dash
+#import dash_auth
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
@@ -83,6 +84,15 @@ def calculate_savings(initial_value, goal, savings_pm, \
 
 app = dash.Dash(__name__)
 
+
+
+#VALID_USERNAME_PASSWORD_PAIRS = ['ben','edwards']
+
+#auth = dash_auth.BasicAuth(
+#    app,
+#    VALID_USERNAME_PASSWORD_PAIRS
+#)
+
 server = app.server
 
 app.layout = html.Div(children=[
@@ -95,13 +105,13 @@ app.layout = html.Div(children=[
     '''),
     
     html.Div(id='output-keypress-1'),
-    dcc.Input(id = 'V_VALUE_TODAY', value=20000, type='number') ,
+    dcc.Input(id = 'V_VALUE_TODAY', value=10000, type='number') ,
     html.Div(id='output-keypress-2'),
-    dcc.Input(id = 'V_REG_SAVE_PM', value=300, type='number') ,
+    dcc.Input(id = 'V_REG_SAVE_PM', value=100, type='number') ,
     html.Div(id='output-keypress-3'),
     dcc.Input(id = 'V_WITHDRAWAL_PM', value=1200, type='number') ,
     html.Div(id='output-keypress-4'),
-    dcc.Input(id = 'V_AGE', value=28, type='number') ,
+    dcc.Input(id = 'V_AGE', value=30, type='number') ,
     html.Div(id='output-keypress-5'),
     dcc.Input(id = 'V_SUPPLEMENT', value=10000, type='number') ,
     html.Div(id='output-keypress-6'),
