@@ -83,6 +83,8 @@ def calculate_savings(initial_value, goal, savings_pm, \
 
 app = dash.Dash(__name__)
 
+server = app.server
+
 app.layout = html.Div(children=[
     html.H1(children='Objective Orientated Savings'),
 
