@@ -134,7 +134,7 @@ def update_output(V_VALUE_TODAY):
 @app.callback(Output('output-keypress-2', 'children'),
               [Input('V_REG_SAVE_PM', 'value')])
 def update_output(V_REG_SAVE_PM):
-    return u'Monthly regular savings into pension: "£{:0,.0f}" '.format(V_REG_SAVE_PM)
+    return u'Monthly savings into pension: "£{:0,.0f}" '.format(V_REG_SAVE_PM)
 
 @app.callback(Output('output-keypress-3', 'children'),
               [Input('V_WITHDRAWAL_PM', 'value')])
@@ -149,7 +149,7 @@ def update_output(V_AGE):
 @app.callback(Output('output-keypress-5', 'children'),
               [Input('V_SUPPLEMENT', 'value')])
 def update_output(V_SUPPLEMENT):
-    return u'Any other investment release at retirement: "£{:0,.0f}" '.format(V_SUPPLEMENT)
+    return u'Any other investment available at retirement: "£{:0,.0f}" '.format(V_SUPPLEMENT)
 
 @app.callback(Output('output-keypress-6', 'children'),
               [Input('V_RETIREMENT_AGE', 'value')])
@@ -194,12 +194,12 @@ def update_output(V_VALUE_TODAY, V_REG_SAVE_PM, V_WITHDRAWAL_PM, \
         7.0, V_AGE, V_SUPPLEMENT, V_RETIREMENT_AGE, V_INFLATION, V_INF_ADJ)
     
     return({'data': [
-                {'x': df_low_risk.Age.tolist(), 'y': df_low_risk.Value.tolist(), 'type': 'line', 'name': 'Low Risk'},
-                {'x': df_med_risk.Age.tolist(), 'y': df_med_risk.Value.tolist(), 'type': 'line', 'name': u'Medium Risk'},
-                {'x': df_high_risk.Age.tolist(), 'y': df_high_risk.Value.tolist(), 'type': 'line', 'name': u'High Risk'},
+                {'x': df_low_risk.Age.tolist(), 'y': df_low_risk.Value.tolist(), 'type': 'line', 'name': 'Low Risk - 3%'},
+                {'x': df_med_risk.Age.tolist(), 'y': df_med_risk.Value.tolist(), 'type': 'line', 'name': u'Medium Risk - 5%'},
+                {'x': df_high_risk.Age.tolist(), 'y': df_high_risk.Value.tolist(), 'type': 'line', 'name': u'High Risk - 7%'},
             ],
             'layout': {
-                'title': 'Dash Data Visualization'}
+                'title': 'Savings Horizon'}
            })
 
 if __name__ == '__main__':
