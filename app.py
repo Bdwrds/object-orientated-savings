@@ -144,7 +144,7 @@ def update_output(V_WITHDRAWAL_PM):
 @app.callback(Output('output-keypress-4', 'children'),
               [Input('V_AGE', 'value')])
 def update_output(V_AGE):
-    return u'Curren age is: "{}" '.format(V_AGE)
+    return u'Current age is: "{}" '.format(V_AGE)
 
 @app.callback(Output('output-keypress-5', 'children'),
               [Input('V_SUPPLEMENT', 'value')])
