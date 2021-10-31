@@ -1,25 +1,41 @@
-
-
+"""
+Basic web app demonstrating objective orientated investing - i.e. having a goal
+author: BenE
+date 2020-05-01
+"""
 import pandas as pd
-#import matplotlib.pyplot as plt
-
 import dash
-#import dash_auth
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
-#import savings
-#from savings import calculate_savings, gr_monthly
 
 
 def gr_monthly(ann_gr):
+    """
+    Function provides an monthly growth rate from users input for a
+     annualized growth rates
+    :param ann_gr: Annualized growth rate figure
+    :return: monthly equivalent
+    """
     return((1+(ann_gr/100))**(1/12))
-
 
 def calculate_savings(initial_value, goal, savings_pm, \
     withdraw_pm, rtn, current_age, supplement_cash, \
     retire_age = 67, inf_adj=2, adj=False):
-    
+    """
+    Primary function to calculate savings scenarios given users input
+    :param initial_value: Starting savings value
+    :param goal: Users desired goal
+    :param savings_pm: Monthly savings value $/£
+    :param withdraw_pm: Monthly withdrawals after retirement $/£
+    :param rtn: The annualized growth rate
+    :param current_age: current age of user
+    :param supplement_cash: Additional cash prior to retirement
+    :param retire_age: Ideal retirement age
+    :param inf_adj: Inflation adjustment value
+    :param adj: Flag to adjust for inflation
+    :return: Dataframe for visualising retirement outcomes given user input
+    """
     growth_rate = gr_monthly(rtn)
     inf_adj_rate = gr_monthly(inf_adj)
     tmp_v = initial_value
@@ -44,9 +60,11 @@ def calculate_savings(initial_value, goal, savings_pm, \
 
         tmp_ls.append([months, tmp_v, savings_pm, rtn, goal, \
             shortfall, goal_adj, savings, current_age + years, years])
-    cols = {0: "Month_Num", 1:"Value", 2:"Regular_Saving", 3:"Ann_Rate", \
-    4:"Goal", 5:"Shortfall", 6:"Goal_Inf_Adjusted", 7:"Total_Savings", \
-    8:"Age", 9:"Years"}
+
+    cols = {
+        0: "Month_Num", 1:"Value", 2:"Regular_Saving", 3:"Ann_Rate", \
+        4:"Goal", 5:"Shortfall", 6:"Goal_Inf_Adjusted", 7:"Total_Savings", \
+        8:"Age", 9:"Years"}
 
     
     list_len = len(tmp_ls)-1
@@ -55,9 +73,7 @@ def calculate_savings(initial_value, goal, savings_pm, \
     v_years = tmp_ls[list_len][9]
     v_age = tmp_ls[list_len][8]
     v_months = tmp_ls[list_len][0]
-    
 
-    #tmp_ls = []
     months = 0
     all_money = v_max_value
 
@@ -80,18 +96,7 @@ def calculate_savings(initial_value, goal, savings_pm, \
     return(df_tmp)
 
 
-
-
 app = dash.Dash(__name__)
-
-
-
-#VALID_USERNAME_PASSWORD_PAIRS = ['ben','edwards']
-
-#auth = dash_auth.BasicAuth(
-#    app,
-#    VALID_USERNAME_PASSWORD_PAIRS
-#)
 
 server = app.server
 
@@ -99,8 +104,10 @@ app.layout = html.Div(children=[
     html.H1(children='Objective Orientated Savings'),
 
     html.Div(children='''
-        OOS: A visual of the impact of saving & compound interest! 
-        
+        A visual of the impact of saving and the power of compound interest. 
+        '''),
+    html.Br(),
+    html.Div(children='''
         Please update the below accordingly:
     '''),
     
